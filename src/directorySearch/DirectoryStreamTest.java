@@ -5,9 +5,14 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DirectoryStreamTest {
 	public static void main(String[] args) {
+		
+		List<Path> fileList = new ArrayList<>();
+		List<Path> pathList = new ArrayList<>();
 		
 		//Essa e uma classe bem simples de pesquisa, mas e bom ter classes simples, para pesquisa simples :)
 		
@@ -37,9 +42,26 @@ public class DirectoryStreamTest {
 				
 				//Mas como podemos ver, a gente tem um arquivo em "SubPasta", mas essa classe e bem simples, e nao faz
 				//Essa pesquisa entrando em pastas.
+				
+				//Podemos seperar assim...
+				if(Files.isRegularFile(path)){
+					fileList.add(path);
+				}
+				
+				if(Files.isDirectory(path)){
+					pathList.add(path);
+				}
 			}
 			
-			System.out.println("\nTeste: " + directory.getFileName());
+			System.out.println("\nDiretorios:");
+			for(Path path : pathList) {
+				System.out.println(path);
+			}
+			
+			System.out.println("\nArquivos:");
+			for(Path file : fileList) {
+				System.out.println(file);
+			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
